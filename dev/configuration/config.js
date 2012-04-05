@@ -148,10 +148,10 @@ define(function(){
                 }],
                 getInTouch: [{
                     "title": "SEND_US_YOUR_FEEDBACK",
-                    "url": "http://sakaiproject.org/"
+                    "url": "http://rsmart.web8.hubspot.com/contact-us-0?utm_campaign=General&utm_source=Website"
                 }, {
                     "title": "CONTACT_SUPPORT",
-                    "url": "http://sakaiproject.org/"
+                    "url": "https://rsn.rsmart.com/"
                 }]
             }
         },
