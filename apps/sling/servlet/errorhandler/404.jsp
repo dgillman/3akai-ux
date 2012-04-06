@@ -124,14 +124,10 @@ response.setStatus(404);
                                 <li><a href="{if document.referrer === ""}/{else}\${document.referrer}{/if}" class="s3d-regular-links s3d-bold">__MSG__GO_BACK_BY_USING_YOUR_BROWSER_BACK_BUTTON__</a></li>
                             </ul>
 
-                            {if links.getInTouch && links.getInTouch.length > 0}
-                                <h3>__MSG__GET_IN_TOUCH__</h3>
-                                <ul>
-                                    {for g in links.getInTouch}
-                                        <li><a class="s3d-regular-links s3d-bold" href="\${g.url}">\${sakai.api.i18n.getValueForKey(g.title)}</a></li>
-                                    {/for}
-                                </ul>
-                            {/if}
+                            <h3>__MSG__GET_IN_TOUCH__</h3>
+                            <ul>
+                                <li><a id="feedback" class="s3d-regular-links s3d-bold" href="javascript:;">__MSG__SEND_US_YOUR_FEEDBACK__</a></li>
+                            </ul>
                         --></div>
                     </div>
                 </div>
@@ -145,5 +141,43 @@ response.setStatus(404);
 
         <!-- 404 JS -->
         <script>require(["/dev/javascript/sakai.404.js"]);</script>
+        <script type="text/javascript" charset="utf-8">
+          var is_ssl = ("https:" == document.location.protocol);
+          var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+          document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript" charset="utf-8">
+          var feedback_widget_options = {};
+          feedback_widget_options.display = "overlay";
+          feedback_widget_options.company = "rsmart";
+          feedback_widget_options.placement = "hidden";
+          feedback_widget_options.color = "#AFBC36";
+          feedback_widget_options.style = "question";
+          feedback_widget_options.product = "rsmart_rsmart_academic";
+          feedback_widget_options.limit = "5";
+          var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+          require(
+              {
+                  baseUrl:"/dev/lib/",
+                  paths: {
+                      "jquery": "jquery/jquery-1.7.0"
+                  }
+              }
+          );
+          require(["jquery"], function($) {
+              $("#feedback").live("click", function(e) {
+                  feedback_widget.show();
+                  e.preventDefault();
+              });
+              $("#help_tab").live("click", function(e) {
+                  feedback_widget.show();
+                  e.preventDefault();
+              });
+              $("#fdbk_close").live("click", function(e) {
+                  feedback_widget.hide();
+                  e.preventDefault();
+              });
+          });
+        </script>
     </body>
 </html>
