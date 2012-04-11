@@ -91,7 +91,7 @@ require(["jquery","sakai/sakai.api.core"], function($, sakai) {
                 if (querystring.contains("redurl")){
                     redurl = querystring.get("redurl");
                 }
-                $(".topnavigation_trigger_login").live("click", forceShowLogin);
+          	    $(document).on("click", ".topnavigation_trigger_login", forceShowLogin);
                 $(".login-container button").bind("click", function(){
                     document.location = (gatewayURL + "?url=" + escape(redurl));
                 });
@@ -124,11 +124,9 @@ require(["jquery","sakai/sakai.api.core"], function($, sakai) {
      * Open the login overlay even though the user is not hovering over it
      */
     var forceShowLogin = function(){
-        if (sakai.api.User.isAnonymous(sakai.data.me)) {
-            $("#topnavigation_user_options_login_fields").addClass("topnavigation_force_submenu_display");
-            $("#topnavigation_user_options_login_wrapper").addClass("topnavigation_force_submenu_display_title");
-            $("#topnavigation_user_options_login_fields_username").focus();
-        }
+        $("#topnavigation_user_options_login_fields").addClass("topnavigation_force_submenu_display");
+        $("#topnavigation_user_options_login_wrapper").addClass("topnavigation_force_submenu_display_title");
+        $("#topnavigation_user_options_login_fields_username").focus();
     };
     sakai.api.Widgets.Container.registerForLoad("nopermissions");
 });

@@ -165,15 +165,11 @@ response.setStatus(404);
               }
           );
           require(["jquery"], function($) {
-              $("#feedback").live("click", function(e) {
+        	  $(document).on("click", "#feedback, #help_tab", function(e) {
                   feedback_widget.show();
                   e.preventDefault();
-              });
-              $("#help_tab").live("click", function(e) {
-                  feedback_widget.show();
-                  e.preventDefault();
-              });
-              $("#fdbk_close").live("click", function(e) {
+        	  });
+        	  $(document).on("click", "#fdbk_close", function(e) {
                   feedback_widget.hide();
                   e.preventDefault();
               });
