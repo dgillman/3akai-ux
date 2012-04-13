@@ -113,9 +113,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             }
         }        
         
-        $(".inbox_items_container input[type='checkbox']").live("change", function() {
-        	handleGlobalButtons();
-        });
+        $(".inbox_items_container input[type='checkbox']").live("change", handleGlobalButtons);
         
         /** Sending messages **/
         var sendMessageFinished = function() {
