@@ -38,10 +38,6 @@ response.setStatus(404);
         <div class="fl-fix fl-centered fixed-container s3d-main-container">
             <div id="error_content">
                 <div id="error_content_second_column">
-                    <div id="error_sign_in_button">
-                        <p class="error_signin_button topnavigation_trigger_login"><button>__MSG__SIGN_IN__</button></p>
-                        <p id="error_sign_up">__MSG__NO_ACCOUNT__ <a class="s3d-regular-links s3d-bold" href="/register">__MSG__SIGN_UP__</a></p>
-                    </div>
                     <div class="error_content_second_column_box">
                         <div class="s3d-contentpage-title">__MSG__ARE_YOU_LOOKING_FOR__</div>
                         <div id="error_content_second_column_box_container">
@@ -132,7 +128,7 @@ response.setStatus(404);
                                 <h3>__MSG__GET_IN_TOUCH__</h3>
                                 <ul>
                                     {for g in links.getInTouch}
-                                        <li><a class="s3d-regular-links s3d-bold" href="\${g.url}">\${sakai.api.i18n.getValueForKey(g.title)}</a></li>
+                                        <li><a id="${g.id}" class="s3d-regular-links s3d-bold" href="${g.url}">${sakai.api.i18n.getValueForKey(g.title)}</a></li>
                                     {/for}
                                 </ul>
                             {/if}
@@ -149,5 +145,39 @@ response.setStatus(404);
 
         <!-- 404 JS -->
         <script>require(["/dev/javascript/sakai.404.js"]);</script>
+        <script type="text/javascript" charset="utf-8">
+          var is_ssl = ("https:" == document.location.protocol);
+          var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+          document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript" charset="utf-8">
+          var feedback_widget_options = {};
+          feedback_widget_options.display = "overlay";
+          feedback_widget_options.company = "rsmart";
+          feedback_widget_options.placement = "hidden";
+          feedback_widget_options.color = "#AFBC36";
+          feedback_widget_options.style = "question";
+          feedback_widget_options.product = "rsmart_rsmart_academic";
+          feedback_widget_options.limit = "5";
+          var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+          require(
+              {
+                  baseUrl:"/dev/lib/",
+                  paths: {
+                      "jquery": "jquery/jquery-1.7.0"
+                  }
+              }
+          );
+          require(["jquery"], function($) {
+        	  $(document).on("click", "#feedback, #help_tab", function(e) {
+                  feedback_widget.show();
+                  e.preventDefault();
+        	  });
+        	  $(document).on("click", "#fdbk_close", function(e) {
+                  feedback_widget.hide();
+                  e.preventDefault();
+              });
+          });
+        </script>
     </body>
 </html>

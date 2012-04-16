@@ -129,6 +129,13 @@ define(["config/dynamicconfig"], function(config) {
         }
     };
 
+    // 404 Error Page configuration
+    config.ErrorPage.Links.getInTouch = [{
+        "title": "SEND_US_YOUR_FEEDBACK",
+        "url": "javascript:;",
+        "id" : "feedback"
+    }];
+
     // Remove the first two leftLinks in the footer
     config.Footer.leftLinks.splice(0,2);
     // Remove the ideainformer link
