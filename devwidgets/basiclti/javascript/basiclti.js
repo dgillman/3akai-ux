@@ -427,6 +427,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             // Cancel it
             $(basicltiSettingsCancel,rootel).click(function(){
                 sakai.api.Widgets.Container.informCancel(tuid, "basiclti");
+            	$('#sakaidocs_editpage').trigger('click');
             });
 
             addColorBinding();
