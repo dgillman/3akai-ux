@@ -124,10 +124,14 @@ response.setStatus(404);
                                 <li><a href="{if document.referrer === ""}/{else}\${document.referrer}{/if}" class="s3d-regular-links s3d-bold">__MSG__GO_BACK_BY_USING_YOUR_BROWSER_BACK_BUTTON__</a></li>
                             </ul>
 
-                            <h3>__MSG__GET_IN_TOUCH__</h3>
-                            <ul>
-                                <li><a id="feedback" class="s3d-regular-links s3d-bold" href="javascript:;">__MSG__SEND_US_YOUR_FEEDBACK__</a></li>
-                            </ul>
+                            {if links.getInTouch && links.getInTouch.length > 0}
+                                <h3>__MSG__GET_IN_TOUCH__</h3>
+                                <ul>
+                                    {for g in links.getInTouch}
+                                        <li><a id="${g.id}" class="s3d-regular-links s3d-bold" href="${g.url}">${sakai.api.i18n.getValueForKey(g.title)}</a></li>
+                                    {/for}
+                                </ul>
+                            {/if}
                         --></div>
                     </div>
                 </div>

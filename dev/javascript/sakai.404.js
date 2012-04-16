@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations under the License.
  */
 
-require(["jquery","sakai/sakai.api.core"], function($, sakai) {
+require(["jquery","sakai/sakai.api.core", "/devwidgets/topnavigation/javascript/topnavigation.js"], function($, sakai) {
 
     sakai_global.nopermissions = function(tuid, showSettings) {
 
@@ -91,7 +91,6 @@ require(["jquery","sakai/sakai.api.core"], function($, sakai) {
                 if (querystring.contains("redurl")){
                     redurl = querystring.get("redurl");
                 }
-          	    $(document).on("click", ".topnavigation_trigger_login", forceShowLogin);
                 $(".login-container button").bind("click", function(){
                     document.location = (gatewayURL + "?url=" + escape(redurl));
                 });
@@ -120,14 +119,6 @@ require(["jquery","sakai/sakai.api.core"], function($, sakai) {
 
     };
     
-    /**
-     * Open the login overlay even though the user is not hovering over it
-     */
-    var forceShowLogin = function(){
-        $("#topnavigation_user_options_login_fields").addClass("topnavigation_force_submenu_display");
-        $("#topnavigation_user_options_login_wrapper").addClass("topnavigation_force_submenu_display_title");
-        $("#topnavigation_user_options_login_fields_username").focus();
-    };
     sakai.api.Widgets.Container.registerForLoad("nopermissions");
 });
 
