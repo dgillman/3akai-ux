@@ -367,10 +367,9 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
 
         sakai_global.sakaidocs.widgetFinish = function(tuid){
             // Add widget to the editor
-            if (!updatingExistingWidget && currentlySelectedWidget && currentlySelectedWidget.widgetname && currentlySelectedWidget.uid) {
+            if (!updatingExistingWidget) {
                 tinyMCE.get("elm1").execCommand('mceInsertContent', false, '<img src="' + sakai.widgets[currentlySelectedWidget.widgetname].img + '" id="' + currentlySelectedWidget.uid + '" class="widget_inline" style="display:block; padding: 10px; margin: 4px" border="1"/>');
             }
-            
             updatingExistingWidget = false;
             $('#insert_dialog').jqmHide();
         };
