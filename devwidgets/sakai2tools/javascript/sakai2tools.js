@@ -147,11 +147,8 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
          * Called when the data has been saved to the JCR.
          */
         var savedDataToJCR = function(success, data){
+            displayRemoteContent(data);
             sakai.api.Widgets.Container.informFinish(tuid, "sakai2tools");
-            
-            displaySettingsMode(false);
-            
-            getRemoteContent();
         };
 
         var isSakai2Tool = function() {
@@ -430,7 +427,6 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             // Cancel it
             $(basicltiSettingsCancel,rootel).click(function(){
                 sakai.api.Widgets.Container.informCancel(tuid, "basiclti");
-                $('#sakaidocs_editpage').trigger('click');
             });
 
             addColorBinding();
@@ -474,21 +470,17 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             $(basicltiSettings,rootel).show(); // Show the basiclti settings
         };
 
-        var displaySettingsMode = function(showSettings) {
-            if (showSettings) {
-                $(basicltiMainContainer,rootel).hide();
-                $(basicltiSettings,rootel).show();
-            }
-            else {
-                $(basicltiSettings,rootel).hide();
-                $(basicltiMainContainer,rootel).show();
-            }        	
-        }
-        
         /*
          * Is the widget in settings mode or not
          */
-        displaySettingsMode(showSettings);
+        if (showSettings) {
+            $(basicltiMainContainer,rootel).hide();
+            $(basicltiSettings,rootel).show();
+        }
+        else {
+            $(basicltiSettings,rootel).hide();
+            $(basicltiMainContainer,rootel).show();
+        }
 
         /**
          * Will fetch the URL and other parameters from the JCR and according to which
@@ -525,7 +517,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                         displayRemoteContent(data);
                     } 
                 }
-                else {
+                else if (showSettings) {
                     displaySettings(null, false);
                 }
             }, false);
