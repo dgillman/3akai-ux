@@ -1,6 +1,36 @@
 rSmart 3akai-ux Changelog
 =========================
 
+com.rsmart.nakamura.uxloader-wrap-1.1.4-rsmart
+----------------------------------------------
+* [maven-release-plugin] prepare release com.rsmart.nakamura.uxloader-wrap-1.1.4-rsmart 95c86be
+* ACAD-939 corrected improper decoding of JSON array on embedcontent widget load f54d61b
+* ACAD-957 added tinyMCE CSS files to ignore list since they are also referenced by config 113796b
+* Revert "ACAD-945 Implement password strength calculus and display for the registration page" 5d4b5fa
+* Revert "Merge pull request #65 from gcrim/ACAD-584" e062caa
+* ACAD-808 added reminder in config_custom.js that custom configuration has moved to a configurable deployment directory de37483
+* Revert "ACAD-625 - re-mapped tag's directory for Arts & Music and Engineering &" bf68bd5
+* ACAD-931 align Academic Public implementation WYSIWYG configuration with UCOE's 9c9320e
+* NOJIRA switch to new nexus URL ac98fc9
+* SAKIII-5270 Add the collection managers group to the current user's subjects so they see the management interface when navigating there (c
+* ATLASNAK-53 merge with NYU v1.1 (cherry picked from commit 6b876d210464d3e6fecd2f43761ba3cd677b1fde) 40d3c3b
+* crude attempt to load page data on demand (cherry picked from commit 54d941b645c7f5ced987e853c5892d3cd1824e73) 492b465
+* [maven-release-plugin] prepare for next development iteration a74f0cd
+
+com.rsmart.nakamura.uxloader-wrap-1.1.3.1-rsmart
+------------------------------------------------
+* ATLASNAK-53 merge with NYU v1.1 (cherry picked from commit 6b876d210464d3e6fecd2f43761ba3cd677b1fde) 3b32963
+* crude attempt to load page data on demand (cherry picked from commit 54d941b645c7f5ced987e853c5892d3cd1824e73) f72fb77
+
+com.rsmart.nakamura.uxloader-wrap-1.1.3-rsmart
+----------------------------------------------
+* [maven-release-plugin] prepare release com.rsmart.nakamura.uxloader-wrap-1.1.3-rsmart 75ae459
+* NOJIRA updated CHANGELOG 349afca
+* ACAD-829 -Psakai-release build is not hashing content files 6026af9
+* ACAD-829 pointed the ant hash_files task at the newly generated hashfiles jar in tools/hashfiles/target instead of at the maven repo b6c9e
+* ACAD-826 Enable sakai.blogwow, sakai.sitestats, and sakai.sections by default in Sakai 2 Tools Widget 1ab47ea
+* [maven-release-plugin] prepare for next development iteration 0092dbe
+
 com.rsmart.nakamura.uxloader-wrap-1.1.2-rsmart
 ----------------------------------------------
 * ACAD-829 -Psakai-release build is not hashing content files 6026af9
