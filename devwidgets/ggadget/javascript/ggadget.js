@@ -184,13 +184,13 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
         /**
          * Save the remotecontent to the jcr
          */
-        var saveRemoteContent = function(e) {
-            e.preventDefault();
+        var saveRemoteContent = function() {
             if (json.url !== "") {
                 sakai.api.Widgets.saveWidgetData(tuid, json, savedDataToJCR);
             } else {
                 sakai.api.Util.notification.show($(remotecontentSettingsUrlErrorTitle).html(), $(remotecontentSettingsUrlError).html());
             }
+            return false;
         };
 
         /**
