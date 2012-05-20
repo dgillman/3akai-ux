@@ -26,6 +26,10 @@
   color: #666;
 }
 
+.s3d-page-fullcolumn-padding {
+  padding: 20px;
+}
+
 /* ACAD-932 Fix the line-height of the paragraphs inside TinyMCE */
 .sakaidocs_widget #s3d-page-container p,
 .sakaidocs_widget #s3d-page-container p span,
