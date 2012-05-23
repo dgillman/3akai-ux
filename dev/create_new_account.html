@@ -74,7 +74,6 @@
                                         <label id="email_label" for="email" class="email required s3d-input-label">__MSG__EMAIL__:</label>
                                         <input type="text" maxlength="255" id="email" name="email" class="create_account_input required email" placeholder="hiroyuki.sakai@example.com"/>
                                         <label id="email_confirm_label" for="emailConfirm" class="email required s3d-input-label">__MSG__EMAIL_CONFIRM__:</label>
-                                        <div class="create_account_input_error" style="display:none;"><!----></div>
                                         <input type="text" maxlength="255" id="emailConfirm" name="emailConfirm" class="create_account_input required email" placeholder="hiroyuki.sakai@example.com"/>
                                     </div>
                                 </div>
@@ -125,6 +124,7 @@
                                                 style="margin:10px 10px 10px 50px;"/>__MSG__CONTACTME__</label>
                                 </div>
                                 <div class="captcha_container" id="captcha_box">
+                                    <div class="create_account_input_error" style="display:none;"><!----></div>
                                     <div id="widget_captcha" class="widget_inline"></div>
                                 </div>
                                 <button id="save_account" class="s3d-button s3d-large-button" type="submit">__MSG__CREATE_ACCOUNT__</button>
@@ -136,6 +136,7 @@
                     <div id="lastName_empty" style="display:none;">__MSG__PLEASE_ENTER_YOUR_LAST_NAME__</div>
                     <div id="email_empty" style="display:none;">__MSG__PLEASE_ENTER_A_VALID_EMAIL_ADDRESS__</div>
                     <div id="email_invalid" style="display:none;">__MSG__THIS_IS_AN_INVALID_EMAIL_ADDRESS__</div>
+                    <div id="emails_must_match" style="display:none;">__MSG__EMAILS_MUST_MATCH__</div>
                     <div id="username_empty" style="display:none;">__MSG__PLEASE_ENTER_YOUR_USERNAME__</div>
                     <div id="username_short" style="display:none;">__MSG__THE_USERNAME_SHOULD_BE_AT_LEAST_THREE_CHARACTERS_LONG__</div>
                     <div id="username_spaces" style="display:none;">__MSG__THE_USERNAME_SHOULDNT_CONTAIN_SPACES__</div>
