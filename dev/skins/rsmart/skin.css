@@ -127,52 +127,152 @@ label.signup_form_error_label {
   text-decoration: none;
 }
 
-/* rSmart skin for full-width pages */
-.rsmart-full-width .fixed-container.s3d-main-container {
-  width: auto;
-  display: table;
-}
+/**
+ * 100% width skin
+ */
 
-.rsmart-full-width .s3d-twocolumn {
-  overflow: hidden;
+/* Primary layout */
+#topnavigation_container,
+.s3d-header .fixed-container,
+.fixed-container,
+.fixed-container.s3d-main-container,
+.categories_widget,
+.s3d-page-header,
+.footer_main {
+  width: auto !important;
   min-width: 960px;
-  display: table;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.rsmart-full-width .s3d-page-fullcolumn-padding {
-  width: auto;
+.fixed-container.s3d-main-container.s3d-twocolumn {
+  min-width: 770px;
+  padding-left: 190px !important;
+}
+
+.s3d-container-shadow-left, .s3d-container-shadow-right {
+  display: none !important;
+}
+
+.s3d-page-column-right {
+  width: auto !important;
+  float: none !important;
+}
+
+.s3d-page-column-left {
+  position: absolute;
+  margin-left: -193px !important;
+}
+
+/* Top branding widget */
+.branding_widget {
+  min-width: 960px;
+}
+
+/* Footer */
+.footer_main .fixed-container {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+/* Explore page */
+.explore .fixed-container {
+  padding-left: 0px !important;
+}
+
+.institutionalskinning_widget #institutionalskinning_logo {
+  background: url('/dev/skins/rsmart/images/rsmart_liberate_learning.png') no-repeat scroll center top #FFF !important;
+}
+
+#explore_content_first_column, .explore_content_first_column {
+  width: 77% !important;
+}
+
+#explore_content_second_column {
+  width: 20% !important;
+}
+
+.recentactivity_widget .recentactivity_activity_item_container {
+  width: auto !important;
+}
+
+.categories_items_content {
+  width: auto !important;
+  min-width: 824px !important;
+}
+
+/* Scroll to top button */
+#topnavigation_scroll_to_top_container {
+  margin-right: 0px !important;
+  position: absolute;
+  right: 0px;
+}
+
+/* Dashboard widget widths */
+.fl-col-flex3 .fl-col {
+  margin-left: 0.25% !important;
+  margin-right: 0.25% !important;
+  padding-left: 0.25% !important;
+  padding-right: 0.25% !important;
+  width: 32.33% !important;
+}
+
+.fl-col-flex2 .fl-col {
+  margin-left: 0.25% !important;
+  margin-right: 0.25% !important;
+  padding-left: 0.25% !important;
+  padding-right: 0.25% !important;
+  width: 48.85% !important;
+}
+
+/* Profile secions on user dashboard */
+.displayprofilesection_field {
+  width: 100% !important;
+  min-width: 720px !important;
+}
+
+/* Create group */
+#newcreategroup_container #newcreategroup_group_data_container,
+#newcreategroup_container #newcreategroup_group_members_container {
+  width: 46% !important;
+}
+
+/* Entity widget */
+#entity_container {
+  min-width: 925px !important;
+}
+
+/* Search */
+.s3d-search-header, .s3d-search-results {
+  width: auto !important;
+}
+
+/* Carousels */
+.categories_widget #categories_items_content {
+  margin: 0 auto !important;
+}
+
+#carousel_container {
+  width: 719px !important;
+  margin: 0 auto !important;
+}
+
+/* Collections in the content preview */
+.contentpreview_other_preview {
+  max-width: none !important;
   min-width: 920px;
 }
 
-.rsmart-full-width .s3d-container-shadow-right,
-.rsmart-full-width .s3d-container-shadow-left {
-  z-index: -1;
+/* Collection viewer in a document */
+.has_nav .collectionviewer_widget #contentpreview_fullsize_preview {
+  min-width: 712px !important;
+  width: auto !important;
 }
 
-.rsmart-full-width .fl-container-flex {
-  display: table;
+.has_nav .collectionviewer_widget .documentviewer_widget {
+  min-width: 682px !important;
+  width: auto !important;
 }
 
-.rsmart-full-width .s3d-page-column-right {
-  width: auto;
-  min-width: 773px;
-  margin-left: 190px;
-}
-
-.rsmart-full-width .s3d-page-column-left {
-  position: absolute;
-}
-
-.rsmart-full-width #group_create_new_area_container {
-  position: relative;
-}
-
-.rsmart-full-width .addarea_widget .addarea_dropdown_content {
-  margin-top: 42px;
-}
-
-.rsmart-full-width #entity_container #entity_group_image.entity_change_avatar .s3d-dropdown-list {
-  z-index:1;
+/* Inserterbar widget */
+#inserterbar_widget {
+  right: 0px !important;
 }
