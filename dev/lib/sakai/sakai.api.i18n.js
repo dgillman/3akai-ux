@@ -229,15 +229,15 @@ define(
              * and we'll use the global sakai.api.User.data.me object to extract it from. If there is no prefered langauge,
              * we'll use the default bundle to translate everything.
              */
-            var loadLanguageBundles = function(){
-                
-                var batchRequest = [];
-                var localeSet = false;
-                var langCode, i10nCode, loadDefaultBundleRequest, loadCustomBundleRequest, loadLocalBundleRequest;
+            var loadLanguageBundles = function() {
+                var langCode;
+                var i10nCode;
+                var loadDefaultBundleRequest;
+                var loadCustomBundleRequest;
+                var loadLocalBundleRequest;
 
                 if (meData && meData.user && meData.user.locale && meData.user.locale.country) {
                     langCode = meData.user.locale.language + "_" + meData.user.locale.country.replace("_", "-");
-                    localeSet = true;
                 } else {
                     langCode = sakai_config.defaultLanguage;
                 }
@@ -254,36 +254,38 @@ define(
                     });
                 }
 
-                batchRequest.push({
+                loadDefaultBundleRequest = {
                     "url": sakai_config.URL.I18N_BUNDLE_ROOT + "default.properties",
                     "method": "GET"
-                });
+                };
 
-                batchRequest.push({
-                    'url': '/dev/configuration/custom.properties',
+                loadCustomBundleRequest = {
+                    'url': sakai_config.URL.I18N_CUSTOM_BUNDLE,
                     'method': 'GET'
-                });
+                };
 
-                if (localeSet) {
-                    batchRequest.push({
-                        "url": sakai_config.URL.I18N_BUNDLE_ROOT + langCode + ".properties",
-                        "method":"GET"
-                    });
-                }
+                loadLocalBundleRequest = {
+                    "url": sakai_config.URL.I18N_BUNDLE_ROOT + langCode + ".properties",
+                    "method":"GET"
+                };
 
                 // callback function for response from batch request
                 var bundleReqFunction = function(success, reqData){
                     if (success){
-                        var loadDefaultBundleSuccess, loadDefaultBundleData,
-                            loadLocalBundleSuccess, loadLocalBundleData,
-                            loadCustomBundleSuccess, loadCustomBundleData;
+                        var loadDefaultBundleSuccess = reqData.results[0].success;
+                        var loadDefaultBundleData = reqData.results[0].body;
+                        var loadLocalBundleSuccess;
+                        var loadLocalBundleData;
+                        var loadCustomBundleSuccess;
+                        var loadCustomBundleData;
 
-                        loadDefaultBundleSuccess = reqData.results[0].success;
-                        loadDefaultBundleData = reqData.results[0].body;
+                        // Custom bundle
+                        if (reqData.results[1]) {
+                            loadCustomBundleSuccess = reqData.results[1].success;
+                            loadCustomBundleData = reqData.results[1].body;
+                        }
 
-                        loadCustomBundleSuccess = reqData.results[1].success;
-                        loadCustomBundleData = reqData.results[1].body;
-
+                        // Local bundle
                         if (reqData.results[2]) {
                             loadLocalBundleSuccess = reqData.results[2].success;
                             loadLocalBundleData = reqData.results[2].body;
@@ -294,17 +296,22 @@ define(
                             loadCustomBundleData = sakaii18nAPI.changeToJSON(loadCustomBundleData);
                             sakaii18nAPI.data.customBundle = loadCustomBundleData;
                         }
-                        if (localeSet && loadLocalBundleSuccess) {
+
+                        if (loadLocalBundleSuccess) {
                             loadLocalBundleData = sakaii18nAPI.changeToJSON(loadLocalBundleData);
                             sakaii18nAPI.data.localBundle = loadLocalBundleData;
                         }
+
                         if (loadDefaultBundleSuccess) {
                             loadDefaultBundleData = sakaii18nAPI.changeToJSON(loadDefaultBundleData);
                             sakaii18nAPI.data.defaultBundle = loadDefaultBundleData;
                         }
+
                         doI18N();
                     }
                 };
+
+                var batchRequest = [loadDefaultBundleRequest, loadCustomBundleRequest, loadLocalBundleRequest];
                 sakai_serv.batch(batchRequest, bundleReqFunction);
             };
 

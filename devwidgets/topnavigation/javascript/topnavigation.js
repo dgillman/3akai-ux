@@ -52,8 +52,8 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
         var navLinkDropdown = ".s3d-dropdown-container";
         var hasSubnav = ".hassubnav";
         var topnavExplore = ".topnavigation_explore";
-        var topnavExploreLeft = "#topnavigation_explore_left";
-        var topnavExploreRight = "#topnavigation_explore_right";
+        var topnavExploreLeft = '#topnavigation_explore_left';
+        var topnavExploreRight = '#topnavigation_explore_right';
         var topnavUserOptions = ".topnavigation_user_options";
         var topnavUserDropdown = ".topnavigation_user_dropdown";
         var topnavigationlogin = "#topnavigation_user_options_login_wrapper";
@@ -254,7 +254,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                         var tempPerson = {
                             "dottedname": dottedName,
                             "name": sakai.api.User.getDisplayName(data.results[i]),
-                            "url": "/~" + data.results[i].userid
+                            "url": data.results[i].homePath
                         };
                         people.push(tempPerson);
                     }
@@ -273,7 +273,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                         var tempGroup = {
                             "dottedname": sakai.api.Util.applyThreeDots(data.results[i]["sakai:group-title"], 100),
                             "name": data.results[i]["sakai:group-title"],
-                            "url": "/~" + data.results[i]["sakai:group-id"]
+                            "url": data.results[i].homePath
                         };
                         if (data.results[i]["sakai:group-visible"] == "members-only" || data.results[i]["sakai:group-visible"] == "logged-in-only") {
                             tempGroup["css_class"] = "topnavigation_group_private_icon";
@@ -454,11 +454,24 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             var leftMenulinks = [];
             var rightMenuLinks = [];
 
+            $('#topnavigation_container .s3d-jump-link').each(function() {
+                if ($($(this).attr('href') + ':visible').length) {
+                    $(this).show();
+                }
+            });
+            $('#topnavigation_container .s3d-jump-link').on('click', function() {
+                $($(this).attr('href')).focus();
+                return false;
+            });
+
             for (var i in sakai.config.Navigation) {
                 if (sakai.config.Navigation.hasOwnProperty(i)) {
                     var temp = "";
-                    var shouldPush = (
-                        sakai.data.me.user.anon &&
+                    /* Check that the user is anon, the nav link is for anon
+                     * users, and if the link is the account create link,
+                     * that internal account creation is allowed
+                     */
+                    var anonAndAllowed = sakai.data.me.user.anon &&
                         sakai.config.Navigation[i].anonymous &&
                         (
                             sakai.config.Navigation[i].id !== 'navigation_anon_signup_link' ||
@@ -466,12 +479,10 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                                 sakai.config.Navigation[i].id === 'navigation_anon_signup_link' &&
                                 sakai.config.Authentication.allowInternalAccountCreation
                             )
-                        )) ||
-                        (
-                            !sakai.data.me.user.anon &&
-                            !sakai.config.Navigation[i].anonymous
                         );
-
+                    var isNotAnon = !sakai.data.me.user.anon &&
+                        !sakai.config.Navigation[i].anonymous;
+                    var shouldPush = anonAndAllowed || isNotAnon;
                     if (shouldPush) {
                         temp = createMenuList(i);
                         if (sakai.config.Navigation[i].rightLink) {
@@ -855,7 +866,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                         $(topnavUserOptionsLoginButtonCancel).show();
                         $(topnavuserOptionsLoginButtonLogin).show();
                         $(topnavUseroptionsLoginFieldsPassword).val("");
-                        $(topnavUseroptionsLoginFieldsUsername).focus();
+                        $(topnavUseroptionsLoginFieldsPassword).focus();
                         $(topnavUseroptionsLoginFieldsUsername).addClass("failedloginusername");
                         $(topnavUseroptionsLoginFieldsPassword).addClass("failedloginpassword");
                         $(topnavUserOptionsLoginForm).valid();
@@ -938,7 +949,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 }
             });
 
-            $("#topnavigation_message_reply").live("click", hideMessageInlay);
+            $("#topnavigation_message_showall").live("click", hideMessageInlay);
             $("#topnavigation_message_readfull").live("click", hideMessageInlay);
             $(".no_messages .s3d-no-results-container a").live("click", hideMessageInlay);
             $(".topnavigation_trigger_login").live("click", forceShowLogin);

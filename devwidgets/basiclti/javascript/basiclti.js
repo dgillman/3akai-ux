@@ -72,6 +72,7 @@ require(['jquery', 'sakai/sakai.api.core'], function($, sakai) {
         var basicltiSettingsLtiKey = basicltiSettings + '_ltikey';
         var basicltiSettingsLtiSecret = basicltiSettings + '_ltisecret';
         var basicltiSettingsWidth = basicltiSettings + '_width';
+        var basicltiSettingsDebug = basicltiSettings + '_debug';
 
         // Containers
         var basicltiMainContainer = basiclti + '_main_container';
@@ -267,13 +268,14 @@ require(['jquery', 'sakai/sakai.api.core'], function($, sakai) {
                     '_charset_': 'utf-8'
                 };
 
+                var dbg = $(basicltiSettingsDebug + ':checked', $rootel).val();
                 var savejson_content = {
                     'sling:resourceType': 'sakai/basiclti',
                     'ltiurl': $(basicltiSettingsLtiUrl, $rootel).val() || '',
                     'ltikey': $(basicltiSettingsLtiKey, $rootel).val() || '',
                     'ltisecret': $(basicltiSettingsLtiSecret, $rootel).val() || '',
                     'debug@TypeHint': 'Boolean',
-                    'debug': $('#basiclti_settings_debug:checked', $rootel).val() !== null,
+                    'debug': dbg !== undefined  && dbg !== null,
                     'release_names@TypeHint': 'Boolean',
                     'release_names': $('#basiclti_settings_release_names:checked', $rootel).val() !== null,
                     'release_principal_name@TypeHint': 'Boolean',
@@ -423,7 +425,8 @@ require(['jquery', 'sakai/sakai.api.core'], function($, sakai) {
                     border_color: 'ccc',
                     frame_height: defaultHeight,
                     width: defaultWidth,
-                    width_unit: defaultWidthUnit
+                    width_unit: defaultWidthUnit,
+                    debug: false
                 };
             }
             renderRemoteContentSettings();
@@ -445,8 +448,7 @@ require(['jquery', 'sakai/sakai.api.core'], function($, sakai) {
                     } else {
                         displayRemoteContent(data);
                     } 
-                }
-                else if (showSettings) {
+                } else if (showSettings) {
                     displaySettings(null, false);
                 }
             }, false);

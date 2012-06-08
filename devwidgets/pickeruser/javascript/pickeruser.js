@@ -156,7 +156,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             });
         };
 
-        $pickeruser_container.jqm({
+        sakai.api.Util.Modal.setup($pickeruser_container, {
             modal: true,
             overlay: 20,
             toTop: true,
@@ -192,7 +192,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
               }
               sakai.api.Communication.sendMessage(messageList, sakai.data.me, sakai.api.Security.saneHTML($("#pickeruser_subject_text").text())+ "," + iConfig.where, messageText);
           }
-          $pickeruser_container.jqmHide();
+          sakai.api.Util.Modal.close($pickeruser_container);
           $(window).trigger("finished.pickeruser.sakai", {"toAdd":userList});
         };
 
@@ -233,12 +233,10 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                             suggestions.push({"value": sakai.api.Security.safeOutput(value), "name": sakai.api.Security.safeOutput(name), "type": sakai.api.Security.safeOutput(type)});
                         }
                     });
-                    add(suggestions);
+                    add( suggestions, query );
                 }
             }, options);
         };
-
-
         sakai.api.Util.AutoSuggest.setup($pickeruser_search_query,{
             asHtmlID: tuid,
             retrieveLimit: 10,
@@ -263,7 +261,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                     '<img class="sm_suggestion_img" src="' + imgSrc + '" />' +
                     '<span class="sm_suggestion_name">' + data.name + '</span>');
                 return line_item;
-           }
+            }
         }, false, dataFn);
 
         var addChoicesFromPickeradvanced = function(data) {
@@ -292,11 +290,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
 
         $(window).unbind("init.pickeruser.sakai");
         $(window).bind("init.pickeruser.sakai", function(e, config, callbackFn) {
-
-            // position dialog box at users scroll position
-            sakai.api.Util.positionDialogBox($pickeruser_container, 50);
-
-            $pickeruser_container.jqmShow();
+            sakai.api.Util.Modal.open($pickeruser_container);
             render(config);
             $(window).unbind("finished.pickeradvanced.sakai");
             $(window).bind("finished.pickeradvanced.sakai", function(e, data) {
@@ -313,7 +307,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
         $pickeruser_close_button.bind("click", function() {
             // reset form.
             reset();
-            $pickeruser_container.jqmHide();
+            sakai.api.Util.Modal.close($pickeruser_container);
             //$("li#as-values-" + tuid).val();
         });
 
