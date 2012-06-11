@@ -147,7 +147,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai){
             var noPreviewArr = [];
             var previewArr = [];
 
-            if (data && data.content && data.content.results) {
+            if (data && data.content && data.content.results && data.content.results.length) {
                 sakai.api.Content.prepareContentForRender(data.content.results, sakai.data.me, function(results){
                     $.each(results, function(index, item) {
                         if (item.thumbnail){
@@ -168,6 +168,9 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai){
         };
 
         var parseGroups = function(data, dataArr){
+            if (data.groups.results.length === 0) {
+                return;
+            }
             var picDescTags = [];
             var picDesc = [];
             var picTags = [];
@@ -219,6 +222,9 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai){
         };
 
         var parseUsers = function(data, dataArr){
+            if (data.users.results.length === 0) {
+                return;
+            }
             var hasPicAndTag = [];
             var hasPic = [];
             var hasTag = [];
