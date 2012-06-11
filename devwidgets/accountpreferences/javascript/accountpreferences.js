@@ -131,13 +131,11 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
         ///////////////////////
         /**
          * Public function that can be called from elsewhere
-         * (e.g. chat and sites widget)
+         * (e.g. sites widget)
          * It initializes the accountPreferencesContainer widget and shows the jqmodal (ligthbox)
          */
         var initialize = function(){
-            sakai.api.Util.positionDialogBox(accountPreferencesContainer);
-            sakai.api.Util.bindDialogFocus(accountPreferencesContainer);
-            $(accountPreferencesContainer).jqmShow();
+            sakai.api.Util.Modal.open(accountPreferencesContainer);
         };
 
         $(window).bind("init.accountpreferences.sakai", function() {
@@ -371,7 +369,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                         sakai.api.Util.notification.show(
                             $(messageEmailChanged).html(),
                             $(messageEmailChangedBody).html());
-                        finishSave();
+                        $(accountPreferencesContainer).jqmHide();
                     } else {
                         sakai.api.Util.notification.show(
                             $(messageEmailChanged).html(),
@@ -395,7 +393,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 }
             }
             if (emailChanges) {
-                $(accountPreferencesEmailChange).submit();
+                $("#accountpreferences_email_change").submit();
             }
         });
 
@@ -403,12 +401,8 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
          * Hides the dialog box when saving is complete and reloads the page if needed
          */
         var finishSave = function(){
-            if (!preferencesChanges &&
-                !privacyChanges &&
-                !passwordChanges &&
-                !emailChanges) {
-
-                $(accountPreferencesContainer).jqmHide();
+            if (!preferencesChanges && !privacyChanges && !passwordChanges){
+                sakai.api.Util.Modal.close(accountPreferencesContainer);
                 if (pageReload){
                     window.setTimeout(function(){
                         document.location.reload();
@@ -489,12 +483,17 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
          * This makes use of the jqModal (jQuery Modal) plugin that provides support
          * for lightboxes
          */
-        $(accountPreferencesContainer).jqm({
+        sakai.api.Util.Modal.setup(accountPreferencesContainer, {
             modal: true,
             overlay: 20,
             toTop: true,
             onShow: myShow,
             onHide: myClose
+        });
+
+        $('#accountpreferences_email').on('change', function() {
+            enableElements($(saveButton));
+            emailChanges = true;
         });
 
         /** Binds all the regional settings select box change **/
@@ -523,11 +522,6 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             e.preventDefault();
         });
 
-        $('#accountpreferences_email').on('keyup', function(e) {
-            enableElements($(saveButton));
-            emailChanges = true;
-        });
-
         var hideAllPanes = function(){
             $(passChangeContainer).hide();
             $(preferContainer).hide();
@@ -535,36 +529,36 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             $(emailChangeContainer).hide();
         };
 
-        $(accountPreferencesPreferencesTab).click(function(){
+        $(accountPreferencesPreferencesTab).on('click', function() {
             $(accountPreferencesTabsButtons).removeClass(tabSelected);
             $(accountPreferencesPreferencesTab).addClass(tabSelected);
             hideAllPanes();
             $(preferContainer).show();
         });
 
-        $(accountPreferencesPrivacyTab).click(function(){
+        $(accountPreferencesPrivacyTab).on('click', function() {
             $(accountPreferencesTabsButtons).removeClass(tabSelected);
             $(accountPreferencesPrivacyTab).addClass(tabSelected);
             hideAllPanes();
             $(privacyContainer).show();
         });
 
-        $(accountPasswordTab).click(function(){
+        $(accountPasswordTab).on('click', function() {
             $(accountPreferencesTabsButtons).removeClass(tabSelected);
             $(accountPasswordTab).addClass(tabSelected);
             hideAllPanes();
             $(passChangeContainer).show();
         });
 
-        $(accountEmailTab).click(function(){
+        $(accountEmailTab).on('click', function() {
             $(accountPreferencesTabsButtons).removeClass(tabSelected);
             $(accountEmailTab).addClass(tabSelected);
             hideAllPanes();
             $(emailChangeContainer).show();
         });
 
-        $(accountPreferencesCancel).die("click").live("click", function() {
-            $(accountPreferencesContainer).jqmHide();
+        $(accountPreferencesCancel).die('click').live('click', function() {
+            sakai.api.Util.Modal.close(accountPreferencesContainer);
         });
 
         /////////////////////////////
@@ -594,16 +588,16 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 } else {
                     var emailVal = sakai.api.User.getProfileBasicElementValue(
                         sakai.data.me.profile,
-                        "email");
-                    $("#accountpreferences_email").val(emailVal);
+                        'email');
+                    $('#accountpreferences_email').val(emailVal);
                 }
                 if (sakai.config.displayTimezone || sakai.config.displayLanguage) {
                     $accountpreferences_langloc_settings.show();
                     if (sakai.config.displayTimezone) {
-                        $("#accountpreferences_select_timezone").show();
+                        $('#accountpreferences_select_timezone').show();
                     }
                     if (sakai.config.displayLanguage) {
-                        $("#accountpreferences_select_language").show();
+                        $('#accountpreferences_select_language').show();
                     }
                 }
             }

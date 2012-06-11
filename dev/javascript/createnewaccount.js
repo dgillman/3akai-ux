@@ -15,7 +15,7 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-require(["jquery", "sakai/sakai.api.core", "misc/zxcvbn"], function($, sakai){
+require(['jquery', 'sakai/sakai.api.core', 'misc/zxcvbn'], function($, sakai){
 
     sakai_global.createnewaccount = function(){
 
@@ -151,11 +151,8 @@ require(["jquery", "sakai/sakai.api.core", "misc/zxcvbn"], function($, sakai){
          */
         var doCreateUser = function(){
             var values = getFormValues();
-            //var mktgData = {};
-
             $("button").attr("disabled", "disabled");
             $("input").attr("disabled", "disabled");
-
             sakai.api.User.createUser(values.username, values.firstName, values.lastName, values.email, values.password, values.password, {
                 recaptcha: {
                     challenge: values["recaptcha-challenge"],
@@ -208,7 +205,6 @@ require(["jquery", "sakai/sakai.api.core", "misc/zxcvbn"], function($, sakai){
             });
         };
 
-
         //////////////////////////////
         // Check username existence //
         //////////////////////////////
@@ -257,8 +253,7 @@ require(["jquery", "sakai/sakai.api.core", "misc/zxcvbn"], function($, sakai){
                         $('#institution').val(),
                         $('#phone').val()
                     ]);
-                $('#password_strength').show();
-                var $strength = $('#password_strength .strength');
+                var $strength = $('#password_strength');
                 var score = 'zero';
                 var strengthPhrase = 'STRENGTH_WEAK';
                 // Determine the strength phrasing and class
@@ -284,14 +279,15 @@ require(["jquery", "sakai/sakai.api.core", "misc/zxcvbn"], function($, sakai){
                 // Remove all the classes and add in the new classes and text
                 $strength
                     .removeClass()
-                    .addClass('strength ' + score)
+                    .addClass('strength_' + score)
                     .text(sakai.api.i18n.getValueForKey(strengthPhrase));
-                $('#password_label').addClass('strength');
+                $('#password_strength').show();
             } else {
                 $('#password_strength').hide();
-                $('#password_label').removeClass('strength');
             }
         };
+
+
 
         ////////////////////
         // Event Handlers //
@@ -329,10 +325,9 @@ require(["jquery", "sakai/sakai.api.core", "misc/zxcvbn"], function($, sakai){
                 }
             });
 
-            $("#role").bind("change", function(){
+            $('#role').on('change', function() {
                 var role = $.trim($(roleField).val());
-
-                setRoleIsStudent (role == 'Student');
+                setRoleIsStudent(role === 'Student');
             });
 
             $('#password').on('keyup', checkPasswordStrength);
