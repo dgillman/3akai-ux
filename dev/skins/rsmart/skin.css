@@ -138,7 +138,8 @@ label.signup_form_error_label {
 .fixed-container.s3d-main-container,
 .categories_widget,
 .s3d-page-header,
-.footer_main {
+.footer_main,
+#allcategories_items_content {
   width: auto !important;
   min-width: 960px;
 }
@@ -275,4 +276,34 @@ label.signup_form_error_label {
 /* Inserterbar widget */
 #inserterbar_widget {
   right: 0px !important;
+}
+
+/* Update button on user profiles */
+.profile-section-save-button {
+  float: left !important;
+  margin-left: 60% !important;
+}
+
+/* Registration Page */
+#signup_header {
+  background-position: center top !important;
+  width: 100% !important;
+}
+
+#signup_header_bg {
+  float: none !important;
+  width: 901px !important;
+  height: 467px;
+  margin: 0 auto !important;
+  background:url("/dev/images/signup_header_bg.png") repeat scroll left top transparent;
+}
+
+.signup_comments {
+  width: 960px !important;
+  margin: 0 auto !important;
+}
+
+.signup_comments h2 {
+  width: 100%;
+  clear: both;
 }
