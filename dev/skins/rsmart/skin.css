@@ -241,6 +241,10 @@ label.signup_form_error_label {
   min-width: 925px !important;
 }
 
+#entity_container .s3d-dropdown-list {
+  z-index: 1;
+}
+
 /* Search */
 .s3d-search-header, .s3d-search-results {
   width: auto !important;
