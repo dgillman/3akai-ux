@@ -168,15 +168,15 @@ label.signup_form_error_label {
   min-width: 960px;
 }
 
+/* Explore page */
+.explore > .fixed-container {
+  padding-left: 0px !important;
+}
+
 /* Footer */
 .footer_main .fixed-container {
   padding-left: 20px !important;
   padding-right: 20px !important;
-}
-
-/* Explore page */
-.explore .fixed-container {
-  padding-left: 0px !important;
 }
 
 .institutionalskinning_widget #institutionalskinning_logo {
