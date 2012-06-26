@@ -237,7 +237,7 @@ label.signup_form_error_label {
 }
 
 /* Entity widget */
-#entity_container {
+.show #entity_container {
   min-width: 925px !important;
 }
 
