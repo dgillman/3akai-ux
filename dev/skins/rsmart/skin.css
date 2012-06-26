@@ -300,3 +300,36 @@ label.signup_form_error_label {
   width: 100%;
   clear: both;
 }
+
+/* Content Profile */
+#content_profile_right_metacomments {
+  width: 65% !important;
+}
+
+#content_profile_bottom_container .fl-container-245 {
+  width: 25% !important;
+}
+
+#contentmetadata_container {
+  width: 100% !important;
+}
+
+.fl-container-650 #contentmetadata_description_container,
+.fl-container-650 #contentmetadata_tags_container,
+.fl-container-650 #contentmetadata_details_container,
+.fl-container-650 #contentmetadata_locations_container,
+.fl-container-650 #contentmetadata_copyright_container,
+.fl-container-650 #contentmetadata_url_container {
+  width: 95% !important;
+  margin: 0 2.5% !important;
+}
+
+.fl-container-650 #contentmetadata_container .s3d-widget-footer {
+  width: 100% !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+#contentmetadata_show_more.s3d-link-button {
+  margin-left: 10px;
+}
