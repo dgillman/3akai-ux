@@ -101,17 +101,6 @@ label.signup_form_error_label {
   min-height: 40px;
 }
 
-/* Overrides and extras for topnavigation.css */
-.topnavigation_help {
-  margin: 0;
-  float: right;
-  margin: 0;
-  background: transparent;
-  border: 0;
-  font-weight: bold;
-  font-size: inherit;
-}
-
 .topnavigation_user_options_login_sign_in_error_margin input {
   border: none !important;
 }
@@ -120,11 +109,8 @@ label.signup_form_error_label {
   border: 2px solid #FFBA00 !important;
 }
 
-.topnavigation_help a {
-  display: block;
-  padding: 7px 25px 10px;
-  color: #fff;
-  text-decoration: none;
+.topnavigation_right {
+  margin-right: 5px;
 }
 
 /**
@@ -205,11 +191,9 @@ label.signup_form_error_label {
   min-width: 824px !important;
 }
 
-/* Scroll to top button */
+/* Scroll to top button - disable it */
 #topnavigation_scroll_to_top_container {
-  margin-right: 0px !important;
-  position: absolute;
-  right: 0px;
+  display: none !important;
 }
 
 /* Dashboard widget widths */
