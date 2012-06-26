@@ -101,17 +101,6 @@ label.signup_form_error_label {
   min-height: 40px;
 }
 
-/* Overrides and extras for topnavigation.css */
-.topnavigation_help {
-  margin: 0;
-  float: right;
-  margin: 0;
-  background: transparent;
-  border: 0;
-  font-weight: bold;
-  font-size: inherit;
-}
-
 .topnavigation_user_options_login_sign_in_error_margin input {
   border: none !important;
 }
@@ -120,11 +109,8 @@ label.signup_form_error_label {
   border: 2px solid #FFBA00 !important;
 }
 
-.topnavigation_help a {
-  display: block;
-  padding: 7px 25px 10px;
-  color: #fff;
-  text-decoration: none;
+.topnavigation_right {
+  margin-right: 5px;
 }
 
 /**
@@ -138,7 +124,6 @@ label.signup_form_error_label {
 .fixed-container.s3d-main-container,
 .categories_widget,
 .s3d-page-header,
-.footer_main,
 #allcategories_items_content {
   width: auto !important;
   min-width: 960px;
@@ -168,15 +153,21 @@ label.signup_form_error_label {
   min-width: 960px;
 }
 
+/* Explore page */
+.explore > .fixed-container {
+  padding-left: 0px !important;
+}
+
 /* Footer */
+.footer_main {
+  width: auto !important;
+  min-width: 960px !important;
+}
 .footer_main .fixed-container {
   padding-left: 20px !important;
   padding-right: 20px !important;
-}
-
-/* Explore page */
-.explore .fixed-container {
-  padding-left: 0px !important;
+  min-width: 920px;
+  width: auto !important;
 }
 
 .institutionalskinning_widget #institutionalskinning_logo {
@@ -200,11 +191,9 @@ label.signup_form_error_label {
   min-width: 824px !important;
 }
 
-/* Scroll to top button */
+/* Scroll to top button - disable it */
 #topnavigation_scroll_to_top_container {
-  margin-right: 0px !important;
-  position: absolute;
-  right: 0px;
+  display: none !important;
 }
 
 /* Dashboard widget widths */
@@ -237,8 +226,12 @@ label.signup_form_error_label {
 }
 
 /* Entity widget */
-#entity_container {
+.show #entity_container {
   min-width: 925px !important;
+}
+
+#entity_container .s3d-dropdown-list {
+  z-index: 1;
 }
 
 /* Search */
@@ -306,4 +299,37 @@ label.signup_form_error_label {
 .signup_comments h2 {
   width: 100%;
   clear: both;
+}
+
+/* Content Profile */
+#content_profile_right_metacomments {
+  width: 65% !important;
+}
+
+#content_profile_bottom_container .fl-container-245 {
+  width: 25% !important;
+}
+
+#contentmetadata_container {
+  width: 100% !important;
+}
+
+.fl-container-650 #contentmetadata_description_container,
+.fl-container-650 #contentmetadata_tags_container,
+.fl-container-650 #contentmetadata_details_container,
+.fl-container-650 #contentmetadata_locations_container,
+.fl-container-650 #contentmetadata_copyright_container,
+.fl-container-650 #contentmetadata_url_container {
+  width: 95% !important;
+  margin: 0 2.5% !important;
+}
+
+.fl-container-650 #contentmetadata_container .s3d-widget-footer {
+  width: 100% !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+#contentmetadata_show_more.s3d-link-button {
+  margin-left: 10px;
 }
