@@ -216,20 +216,51 @@ require(['jquery', 'sakai/sakai.api.core', 'misc/zxcvbn'], function($, sakai){
          * and don't want to do anything else afterwards if set to true. If set
          * to false, it will start doing the actual creation of the user once
          * the check has been completed.
-         */
+        */
         var checkUserName = function(checkingOnly, callback){
             var values = getFormValues();
+            var ret = false;
+            var async = false;
+            if (callback){
+                async = true;
+            }
+            // If we reach this point, we have a username in a valid format. We then go and check
+            // on the server whether this eid is already taken or not. We expect a 200 if it already
+            // exists and a 401 if it doesn't exist yet.
             var url = sakai.config.URL.USER_EXISTENCE_SERVICE.replace(/__USERID__/g, $.trim(values.username));
-            
-			      return sakai.api.User.checkExistence(url, checkingOnly, callback, errObj);
+            if (errObj.length === 0) {
+                $.ajax({
+                    // Replace the preliminary parameter in the service URL by the real username entered
+                    url: url,
+                    cache: false,
+                    async: async,
+                    success: function(){
+                        if (callback){
+                            callback(false);
+                        }
+                    },
+                    error: function(xhr, textStatus, thrownError){
+                        // SAKIII-1736 - IE will interpret the 204 returned by the server as a
+                        // status code 1223, which will cause the error clause to activate
+                        if (xhr.status === 1223 || xhr.status === 409) {
+                            ret = false;
+                        } else {
+                            ret = true;
+                        }
+                        if (callback){
+                            callback(ret);
+                        }
+                    }
+                });
+            }
+            return ret;
         };
 
-		var checkEmailAddress = function(checkingOnly, callback) {
+        var checkEmailAddress = function(checkingOnly, callback) {
             var values = getFormValues();
             var url = sakai.config.URL.USER_EMAIL_EXISTENCE_SERVICE.replace(/__EMAIL__/g, $.trim(values.email));
-			
             return sakai.api.User.checkExistence(url, checkingOnly, callback, errObj);
-		};
+	};
 		
         var initCaptcha = function(){
             sakai.api.Widgets.widgetLoader.insertWidgets("captcha_box", false);
