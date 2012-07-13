@@ -14,20 +14,20 @@ define(
         if (configurationMetaData.configurationCacheKey) {
             dynamicconfigURL += configurationMetaData.configurationCacheKey + ".";
         }
-        dynamicconfigURL += "json";
+        dynamicconfigURL += "js";
 
         $.ajax({
             url: dynamicconfigURL,
-            dataType: 'json',
+            cached: true,
             async: false,
-            success: function (data){
-                $.each(data, function(index,value){
-                    config[index] = value;
-                });
+            dataType: 'text',
+            success: function(text){
+                // eval the Javascript in this context so it has access to the config
+                eval(text);
             },
             error: function (jqXHR, textStatus, errorThrown){
                 if (window.console){
-                    console.log("The dynamic config JSON is malformed. Check your custom config file.")
+                    console.log("An error occurred while loading the custom configuration.");
                 }
             }
         });
