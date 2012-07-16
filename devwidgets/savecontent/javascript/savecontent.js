@@ -107,6 +107,47 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 left: savecontentLeft
             });
 
+            // TODO: API-ify this chunk of code, it would be useful elsewhere
+            var leftPos = parseInt($savecontent_widget.css('left'), 10);
+            var rightmostPoint = $savecontent_widget.width() + leftPos;
+
+            var docWidth = $(document).width();
+
+            var overflow = docWidth - rightmostPoint;
+
+            // cache the docWidth and the overflow, as it will change when
+            // the dialog is shown for the first time
+            if (!$savecontent_widget.data('docWidth')) {
+                $savecontent_widget.data('docWidth', docWidth);
+            }
+
+            var dataDocWidth = $savecontent_widget.data('docWidth');
+
+            if (!$savecontent_widget.data('overflow')) {
+                $savecontent_widget.data('overflow', overflow);
+            }
+
+            var dataOverflow = $savecontent_widget.data('overflow');
+
+            if (dataOverflow) {
+                if (dataDocWidth !== docWidth && dataDocWidth - dataOverflow !== docWidth) {
+                    $savecontent_widget.data('docWidth', docWidth);
+                    $savecontent_widget.data('overflow', overflow);
+                } else if (dataDocWidth - dataOverflow === docWidth) {
+                    docWidth = dataDocWidth;
+                    overflow = dataOverflow;
+                }
+            }
+
+            if (rightmostPoint > docWidth) {
+                var newLeft = leftPos - overflow - 15;
+                $savecontent_widget.css('left', newLeft);
+            }
+
+            if (leftPos < 0) {
+                $savecontent_widget.css('left', 15);
+            }
+
             var json = {
                 "files": contentObj.data,
                 "context": contentObj.context,
