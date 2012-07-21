@@ -90,6 +90,9 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
          * toggleSavecontent
          * Displays the widget
          */
+        var firstTime = true;
+        var saveContentLeft = 0;
+        var originalWidth = 0;
         var toggleSavecontent = function() {
 
             $savecontent_save.removeAttr("disabled");
@@ -100,53 +103,38 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             }
 
             var savecontentTop = clickedEl.offset().top + clickedEl.height() - 3 + adjustHeight;
-            var savecontentLeft = clickedEl.offset().left + clickedEl.width() / 2 - 122;
+            var docWidth = $(document).width();
+
+            /**
+             * If this is the first time through, or the browser has been resized
+             * calculate if there is any overflow with the positioning of the dialog
+             */
+            if (firstTime || docWidth !== originalWidth) {
+                savecontentLeft = clickedEl.offset().left + clickedEl.width() / 2 - 122;
+
+                var leftPos = parseInt($savecontent_widget.css('left'), 10);
+                var rightmostPoint = parseInt($savecontent_widget.css('width'), 10) + savecontentLeft;
+                var overflow = docWidth - rightmostPoint;
+
+                // If there is any overflow (it will be negative), adjust the dialog
+                // to appear five pixels from the right side of the document
+                if (overflow < 0) {
+                    savecontentLeft = savecontentLeft + overflow - 5;
+                }
+            }
 
             $savecontent_widget.css({
                 top: savecontentTop,
                 left: savecontentLeft
             });
 
-            // TODO: API-ify this chunk of code, it would be useful elsewhere
-            var leftPos = parseInt($savecontent_widget.css('left'), 10);
-            var rightmostPoint = $savecontent_widget.width() + leftPos;
-
-            var docWidth = $(document).width();
-
-            var overflow = docWidth - rightmostPoint;
-
-            // cache the docWidth and the overflow, as it will change when
-            // the dialog is shown for the first time
-            if (!$savecontent_widget.data('docWidth')) {
-                $savecontent_widget.data('docWidth', docWidth);
+            // re-calculate the document width with the dialog in place and save that
+            docWidth = $(document).width();
+            if (docWidth !== originalWidth) {
+                originalWidth = docWidth;
             }
 
-            var dataDocWidth = $savecontent_widget.data('docWidth');
-
-            if (!$savecontent_widget.data('overflow')) {
-                $savecontent_widget.data('overflow', overflow);
-            }
-
-            var dataOverflow = $savecontent_widget.data('overflow');
-
-            if (dataOverflow) {
-                if (dataDocWidth !== docWidth && dataDocWidth - dataOverflow !== docWidth) {
-                    $savecontent_widget.data('docWidth', docWidth);
-                    $savecontent_widget.data('overflow', overflow);
-                } else if (dataDocWidth - dataOverflow === docWidth) {
-                    docWidth = dataDocWidth;
-                    overflow = dataOverflow;
-                }
-            }
-
-            if (rightmostPoint > docWidth) {
-                var newLeft = leftPos - overflow - 15;
-                $savecontent_widget.css('left', newLeft);
-            }
-
-            if (leftPos < 0) {
-                $savecontent_widget.css('left', 15);
-            }
+            firstTime = false;
 
             var json = {
                 "files": contentObj.data,
