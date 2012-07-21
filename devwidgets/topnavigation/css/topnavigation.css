@@ -49,7 +49,7 @@
 .topnavigation_search #topnavigation_search_results_bottom_container #topnavigation_search_see_all{float:right; margin-top:3px;text-decoration: none;}
 
 /* USER */
-.topnavigation_user_container {float:right;}
+.topnavigation_user_container {float:left;}
 .topnavigation_user_container ul {margin:0;}
 .topnavigation_usersection_splitter {float:right; color:#454a4f; margin-top:11px;margin-right:20px;}
 
@@ -141,7 +141,7 @@
 
 .personinfo_trigger {color: #666 !important; border-bottom: 1px dotted #666}
 #topnavigation_explore_right {
-    float: right;
+    float: left;
 }
 .s3d-dropdown-menu.topnavigation_dual_login .s3d-dropdown-menu-content-container {
     border-radius: 0 0 2px 2px;
@@ -153,7 +153,12 @@
 
 /* Accessibility styles for keyboard navigation */
 #topnavigation_user_options_login{margin:0;background:transparent;border:0;font-weight:bold;font-size:inherit;}
-.topnavigation_explore .topnavigation_counts_container button:focus, .topnavigation_explore .s3d-dropdown-menu li a:focus, .topnavigation_user_container .s3d-dropdown-menu li a:focus, #topnavigation_user_options_login li a:focus, #navigation_anon_signup_link:focus {
+.topnavigation_explore .topnavigation_counts_container button:focus,
+.topnavigation_explore .s3d-dropdown-menu li a:focus,
+.topnavigation_user_container .s3d-dropdown-menu li a:focus,
+#topnavigation_user_options_login li a:focus,
+.topnavigation_right li a:focus,
+#navigation_anon_signup_link:focus {
     -moz-border-radius: 2px;
     border-radius: 2px;
     -webkit-border-radius: 2px;
