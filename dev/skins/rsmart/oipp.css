@@ -1,0 +1,9 @@
+.institutionalskinning_widget #institutionalskinning_logo {
+  background: url('/dev/skins/rsmart/images/oipp/cole_default.png') no-repeat scroll left top #FFF !important;
+}
+
+#footer_logo {
+  background-image: url("/dev/skins/rsmart/images/oipp/footer_logo_cole.png") !important;
+  width: 124px !important;
+  height: 41px !important;
+}
