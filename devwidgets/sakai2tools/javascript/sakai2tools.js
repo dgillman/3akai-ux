@@ -482,6 +482,10 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             $(basicltiMainContainer,rootel).show();
         }
 
+        var displayPlaceholder = function() {
+            $(basicltiMainContainer).html("Edit the page to change the Sakai CLE tool settings.");
+        }
+
         /**
          * Will fetch the URL and other parameters from the JCR and according to which
          * view we are in, fill in the settings or display an iframe.
@@ -518,8 +522,11 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                         displayRemoteContent(data);
                     } 
                 }
-                else if (showSettings) {
+                else if (showSettings){
                     displaySettings(null, false);
+                }
+                else { 
+                    displayPlaceholder();
                 }
             }, false);
         };
