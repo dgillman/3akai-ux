@@ -79,12 +79,17 @@ require(["jquery", "underscore", "sakai/sakai.api.core"], function($, _, sakai){
         ///////////////
 
         var renderVersions = function(users) {
+            // Define options here for applyThreeDots, as I can't figure out how
+            // to escape a hash inside a TrimPath variable declaration in the template
+            var options = { whole_word: false, max_rows: 1 };
+
             $(versionsContainer, $rootel).html(sakai.api.Util.TemplateRenderer(versionsTemplate, {
                 'itemsBeforeScroll': itemsBeforeScroll,
                 'users': users,
                 "data": versions,
                 "sakai": sakai,
-                "currentPage": currentPageShown
+                "currentPage": currentPageShown,
+                "options": options
             }));
             if (versions.length) {
                 $('#versions_carousel_container', $rootel).jcarousel({
