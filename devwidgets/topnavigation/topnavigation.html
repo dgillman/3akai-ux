@@ -1,15 +1,18 @@
 <link rel="stylesheet" type="text/css" href="/devwidgets/topnavigation/css/topnavigation.css"/>
 
 <div id="topnavigation_container">
+    <a class="s3d-jump-link s3d-bold s3d-aural-text" href="#topnavigation_target" title="__MSG__SKIP_TOP_MENU__" accesskey="__MSG__SKIP_TOP_MENU_KEY__" id="topnavigation_skip">__MSG__SKIP_TOP_MENU__</a>
+    <a class="s3d-jump-link s3d-bold s3d-aural-text" href="#lhnavigation_target" title="__MSG__SKIP_TO_LH_MENU__" accesskey="__MSG__SKIP_TO_LH_MENU_KEY__" id="lhnavigation_skip" style="display:none">__MSG__SKIP_TO_LH_MENU__</a>
     <div id="topnavigation_scroll_to_top_container">
         <button type="button" class="s3d-link-button" id="topnavigation_scroll_to_top" title="__MSG__SCROLL_TO_TOP__" accesskey="s" style="display:none;"></button>
     </div>
     <ul class="topnavigation_explore" id="topnavigation_explore_left" role="menubar"><!----></ul>
     <div class="topnavigation_right">
         <div class="topnavigation_search s3d-search-container">
-            <input type="text" tabindex_none="40" id="topnavigation_search_input" title="__MSG__SEARCH_FOR__" class="s3d-search-inputfield"/>
-            <button type="button" class="s3d-button s3d-overlay-button s3d-search-button">
-                <img src="/dev/images/search_icon.png" alt="__MSG__SEARCH_FOR__"/>
+            <input x-webkit-speech speech type="text" tabindex_none="40" id="topnavigation_search_input" title="__MSG__SEARCH_FOR__" class="s3d-search-inputfield"/>
+            <button type="button" class="s3d-button s3d-overlay-button s3d-search-button" title="__MSG__SUBMIT_SEARCH__">
+                <span class="s3d-search-button-icon"></span>
+                <span class="s3d-aural-text">__MSG__SUBMIT_SEARCH__</span>
             </button>
             <div id="topnavigation_search_results" style="display:none;">
                 <div id="topnavigation_search_results_container" role="menu"><!----></div>
@@ -20,14 +23,15 @@
         <ul class="topnavigation_explore" id="topnavigation_explore_right" role="menubar"><!----></ul>
     </div>
 </div>
+<h2 id="topnavigation_target" class="s3d-aural-text" tabindex="-1">__MSG__SKIP_MENU_TARGET__</h2>
 
 <div id="navigation_template" style="display:none"><!--
     {macro appendInfo(type)}
         {if type === "messages"}
             <div id="topnavigation_user_messages_container" class="topnavigation_counts_container">
                 <div class="topnavigation_usersection_splitter">|</div>
-                <button class="topnavigation_menuitem_counts_container" id="topnavigation_messages_container">
-                    <div id="topnavigation_user_inbox_icon" class="topnavigation_menuitem_icon"></div>
+                <button class="topnavigation_menuitem_counts_container" id="topnavigation_messages_container" title="__MSG__LATEST_MESSAGE__">
+                    <div id="topnavigation_user_inbox_icon" class="topnavigation_menuitem_icon"><span class="s3d-aural-text">__MSG__LATEST_MESSAGE__</span></div>
                     <div id="topnavigation_user_inbox_messages" class="topnavigation_menuitem_counts s3d-bold"></div>
                 </button>
                 <div class="s3d-dropdown-menu" style="display:none;"></div>
@@ -35,9 +39,9 @@
         {elseif type === "collections"}
             <div id="topnavigation_user_collections_container" class="topnavigation_counts_container">
                 <div class="topnavigation_usersection_splitter">|</div>
-                <button class="topnavigation_menuitem_counts_container collector_toggle">
-                    <div id="topnavigation_user_collections_icon" class="topnavigation_menuitem_icon"></div>
-                    <div id="topnavigation_user_collections_total" class="topnavigation_menuitem_counts s3d-bold">${"" + sakai.api.Content.Collections.getMyCollectionsCount()}</div>
+                <button class="topnavigation_menuitem_counts_container inserter_toggle" title="__MSG__MY_COLLECTIONS__">
+                    <div id="topnavigation_user_collections_icon" class="topnavigation_menuitem_icon"><span class="s3d-aural-text">__MSG__MY_COLLECTIONS__</span></div>
+                    <div id="topnavigation_user_collections_total" class="topnavigation_menuitem_counts s3d-bold">${"" + (sakai.api.Content.Collections.getMyCollectionsCount() + 1)}</div>
                 </button>
             </div>
         {/if}
@@ -71,14 +75,14 @@
     <div class="s3d-dropdown-container">
         {if dataPresent}
             {var category = data.results[0].category === "invitation" ? "invitations" : "inbox"}
-            <a href="/me#l=messages/${category}&message=${data.results[0].id}&reply=true" class="s3d-button s3d-overlay-button" id="topnavigation_message_showall">__MSG__REPLY__</a>
+            <a href="/me#l=messages/${category}" class="s3d-button s3d-overlay-button" id="topnavigation_message_showall">__MSG__SEE_ALL__</a>
             <div class="s3d-dropdown-menu-content-container">
                 <div id="topnavigation_message_profile_pic">
-                    <img src="${data.results[0].from.picture}" alt="test"/>
+                    <img src="${data.results[0].from.picture}" alt="__MSG__PROFILE_PICTURE_FOR__ ${data.results[0].from.name}"/>
                 </div>
                 <div id="topnavigation_message_sender" class="s3d-bold">${data.results[0].from.name} <span>(${data.results[0].timeago})</span></div>
-                <div id="topnavigation_message_subject" class="s3d-bold">${sakai.api.Util.applyThreeDots(data.results[0].subject, 120)}</div>
-                <div id="topnavigation_message_body">${sakai.api.Util.applyThreeDots(data.results[0].body_nolinebreaks, 270, null, null, true)}</div>
+                <div id="topnavigation_message_subject" class="s3d-bold">${sakai.api.Util.applyThreeDots(data.results[0].subject, 115)}</div>
+                <div id="topnavigation_message_body">${sakai.api.Util.applyThreeDots(data.results[0].body_nolinebreaks, 255, null, null, true)}</div>
                 <a href="/me#l=messages/${category}&message=${data.results[0].id}" class="s3d-button s3d-overlay-button" id="topnavigation_message_readfull">__MSG__READ_FULL_MESSAGE__</a>
                 <hr class="fl-hidden fl-push"/>
             {else}
@@ -86,7 +90,7 @@
                     <div class="s3d-no-results-container">
                         <img src="/devwidgets/topnavigation/images/topnav_messages_demo.png" alt="__MSG__MESSAGES_DEMO__" id="message_video_preview"/>
                         <div class="s3d-no-results-icon s3d-no-results-people"></div>
-                        <h1>__MSG__YOUR_INBOX_IS_EMPTY__. <a class="s3d-regular-links" href="/me#l=messages/inbox&newmessage=true">__MSG__SEND_A_MESSAGE__</a> __MSG__OR__ <a class="s3d-regular-links" href="/search#l=people">__MSG__FIND_PEOPLE__</a> __MSG__TO_EXPAND_YOUR_NETWORK__.</h1>
+                        <p>__MSG__YOUR_INBOX_IS_EMPTY__. <a class="s3d-regular-links" href="/me#l=messages/inbox&newmessage=true">__MSG__SEND_A_MESSAGE__</a> __MSG__OR__ <a class="s3d-regular-links" href="/search#l=people">__MSG__FIND_PEOPLE__</a> __MSG__TO_EXPAND_YOUR_NETWORK__.</p>
                     </div>
             {/if}
         </div>
@@ -199,6 +203,8 @@
                         <a class="s3d-regular-links topnavigation_sign_up_link" href="/register">__MSG__SIGN_UP__</a>
                         <br/>
                     {/if}
+                    <span class="topnavigation_sign_up_link">__MSG__HAVING_LOGIN_TROUBLE__</span>
+                    <a class="s3d-regular-links topnavigation_sign_up_link" id="topnavigation_reset_pwd_link" href="http://getsatisfaction.com/rsmart/topics/passwords_there_isnt_a_way_to_reset_them">__MSG__RESET_PASSWORD__</a>
                     <button type="submit" class="s3d-button s3d-overlay-button no-pad" id="topnavigation_user_options_login_button_login">__MSG__SIGN_IN__</button>
                     <span id="topnavigation_user_options_login_button_signing_in" style="display:none;">__MSG__SIGNING_IN__</span>
                 </div>
@@ -208,7 +214,6 @@
     {/macro}
 
     {if anon}
-        <div id="widget_lostpwd" class="widget_inline"></div>
         <div class="s3d-dropdown-menu{if auth.internalAndExternal} topnavigation_dual_login{/if}" id="topnavigation_user_options_login_wrapper">
             <button id="topnavigation_user_options_login">__MSG__SIGN_IN__</button>
             <div id="topnavigation_user_options_login_fields" class="s3d-dropdown-container" style="display:none;">
@@ -218,10 +223,6 @@
             {if !auth.externalAuth || auth.internalAndExternal}
                 ${internalAuthMenu(auth)}
             {/if}
-                <div class="s3d-dropdown-menu-content-container">
-                    <span class="topnavigation_sign_up_link">__MSG__HAVING_LOGIN_TROUBLE__</span>
-                    <a class="s3d-regular-links topnavigation_sign_up_link" href="/content#p=jdTyssJcqi/UC%20Online%20Login%20Information">__MSG__RESET_PASSWORD__</a>
-                </div>
             </div>
         </div>
     {else}
