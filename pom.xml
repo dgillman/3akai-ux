@@ -19,6 +19,9 @@
   <name>Sakai 3 UX Loader Wrapper</name>
   <description>Loads the Sakai 3 UI into the JCR</description>
   <url>http://github.com/sakaiproject/3akai-ux</url>
+  <prerequisites>
+    <maven>3.0.4</maven>
+  </prerequisites>
   <scm>
     <connection>scm:git:git://github.com/rSmart/3akai-ux.git</connection>
     <developerConnection>scm:git:git@github.com:rSmart/3akai-ux.git</developerConnection>
@@ -51,7 +54,22 @@
     </site>
      -->
   </distributionManagement>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <wagon.s3.version>1.1.10</wagon.s3.version>
+  </properties>
   <repositories>
+    <repository>
+      <id>rsmart-dev</id>
+      <name>rsmart-dev</name>
+      <url>https://nexus.rsmart.com/nexus/content/groups/public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
         <repository>
             <id>sakai-maven2</id>
             <name>Sakai Maven Repository</name>
@@ -119,6 +137,13 @@
     <module>tools/hashfiles</module>
   </modules>
   <build>
+  <extensions>
+    <extension>
+      <groupId>org.kuali.maven.wagons</groupId>
+      <artifactId>maven-s3-wagon</artifactId>
+      <version>${wagon.s3.version}</version>
+    </extension>
+  </extensions>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
