@@ -29,26 +29,27 @@
     <url>http://jira.sakaiproject.org/jira/browse/SAKIII</url>
   </issueManagement>
   <distributionManagement>
-        <downloadUrl>http://source.sakaiproject.org/maven2/</downloadUrl>
-        <snapshotRepository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>sakai-maven-snapshots-scp</id>
-            <name>Sakai snapshot Repo</name>
-            <url>scp://source.sakaiproject.org/var/www/html/maven2-snapshots</url>
-            <layout>default</layout>
-        </snapshotRepository>
-        <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>sakai-maven2-scp</id>
-            <name>Sakai maven2 repository</name>
-            <url>scp://source.sakaiproject.org/var/www/html/maven2</url>
-            <layout>default</layout>
-        </repository>
-        <site>
-            <id>sakai-site</id>
-            <name>Sakai release Site</name>
-            <url>scp://source.sakaiproject.org/var/www/html/release/nakamura/${project.version}</url>
-        </site>
+    <downloadUrl>http://source.sakaiproject.org/maven2/</downloadUrl>
+    <snapshotRepository>
+       <uniqueVersion>false</uniqueVersion>
+       <id>rsmart.snapshot.repo</id>
+       <name>rsmart snapshot repository</name>
+       <url>s3://rsmart-dev/artifacts/maven/snapshot</url>
+       <layout>default</layout>
+    </snapshotRepository>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>rsmart.release.repo</id>
+      <name>rsmart release repository</name>
+      <url>s3://rsmart-dev/artifacts/maven/release</url>
+    </repository>
+    <!--
+    <site>
+      <id>sakai-site</id>
+      <name>Sakai release Site</name>
+      <url>scp://source.sakaiproject.org/var/www/html/release/nakamura/${project.version}</url>
+    </site>
+     -->
   </distributionManagement>
   <repositories>
         <repository>
