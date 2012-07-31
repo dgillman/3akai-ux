@@ -20,9 +20,9 @@
   <description>Loads the Sakai 3 UI into the JCR</description>
   <url>http://github.com/sakaiproject/3akai-ux</url>
   <scm>
-    <connection>scm:git:git://github.com/sakaiproject/3akai-ux.git</connection>
-    <developerConnection>scm:git:git@github.com:sakaiproject/3akai-ux.git</developerConnection>
-    <url>http://github.com/sakaiproject/3akai-ux/</url>
+    <connection>scm:git:git://github.com/rSmart/3akai-ux.git</connection>
+    <developerConnection>scm:git:git@github.com:rSmart/3akai-ux.git</developerConnection>
+    <url>https://github.com/rSmart/3akai-ux</url>
   </scm>
   <issueManagement>
     <system>jira</system>
