@@ -15,7 +15,7 @@
     <parent>
       <groupId>com.rsmart.nakamura</groupId>
       <artifactId>com.rsmart.nakamura.oipp.uxloader-wrap</artifactId>
-      <version>1.3.0.3-rsmart-SNAPSHOT</version>
+      <version>1.3.0.3-rsmart</version>
       <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.sakaiproject.nakamura</groupId>
