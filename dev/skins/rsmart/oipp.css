@@ -3,7 +3,63 @@
 }
 
 #footer_logo {
-  background-image: url("/dev/skins/rsmart/images/oipp/footer_logo_cole.png") !important;
-  width: 124px !important;
-  height: 41px !important;
+  background-image: url("/dev/skins/rsmart/images/oipp/footer_logo_uconline.png") !important;
+  width: 200px !important;
+  height: 50px !important;
+}
+
+.s3d-navigation-container {
+  background: #7F7F7F !important;
+}
+
+#topnavigation_user_options_login,
+#help_tab1,
+#navigation_explore_link,
+#topnavigation_user_collections_total,
+#navigation_create_and_add_link,
+#topnavigation_user_inbox_messages,
+#navigation_you_link,
+#topnavigation_user_options_name
+{
+  font-weight: normal !important;
+  text-transform: uppercase !important;
+}
+
+.s3d-search-button-icon {
+  background: url("/dev/skins/rsmart/images/search_icon_white.png") no-repeat top left transparent !important;
+}
+
+.s3d-page-header {
+  border: none !important;
+  margin-top: 0 !important;
+  min-height: 0 !important;
+}
+
+#explore_navigation {
+  padding: 0;
+}
+
+.footer_main {
+  background: #7F7F7F url(/dev/skins/rsmart/images/oipp/footer_background.png) no-repeat right top !important;
+}
+
+.footer_main .fixed-container {
+  border: none !important;
+  padding: 20px 50px 0 10px !important;
+}
+
+.footer_main a:link, .footer_main a:active, .footer_main a:visited {
+  color: #FFFFFF !important;
+}
+
+#footer_links_right {
+  margin: 16px 0 0 0;
+}
+
+#footer_links_right .toplink {
+  border-left: 1px solid #ffd204;
+  font-weight: normal;
+  margin: 10px;
+  padding: 10px 10px 10px 50px;
+  text-transform: uppercase;
 }
