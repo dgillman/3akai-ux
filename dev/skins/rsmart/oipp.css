@@ -30,8 +30,6 @@
 }
 
 .s3d-page-header {
-  border: none !important;
-  margin-top: 0 !important;
   min-height: 0 !important;
 }
 
@@ -48,8 +46,20 @@
   padding: 20px 50px 0 10px !important;
 }
 
-.footer_main a:link, .footer_main a:active, .footer_main a:visited {
+.footer_main a:link,
+.footer_main a:active,
+.footer_main a:visited,
+.footer_langloc,
+#footer_language,
+#footer_location
+{
   color: #FFFFFF !important;
+}
+
+#footer_language:hover,
+#footer_location:hover
+{
+  text-decoration: underline !important;
 }
 
 #footer_links_right {
