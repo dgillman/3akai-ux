@@ -85,6 +85,20 @@ require(["jquery", "sakai/sakai.api.core", "/devwidgets/documentviewer/lib/docum
             $documentviewerPreview.html(
                 sakai.api.Util.TemplateRenderer('documentviewer_image_template', templateObject)
             );
+
+            var alignment = $documentviewerPreview.parents('.embedcontent_large_content').attr('data-align-content');
+            if (alignment) {
+                switch (alignment) {
+                    case 'left':
+                        $documentviewerPreview.find('img').css('margin', '0');
+                        break;
+                    case 'right':
+                        $documentviewerPreview.find('img').css({margin: '0', display: 'inline'}).parent('div').css('text-align', 'right');
+                        break;
+                    default:
+                        break;
+                }
+            }
         };
 
         var renderEmbedPreview = function(data){

@@ -65,6 +65,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
         var $embedcontent_choose_layout_container = $("#embedcontent_choose_layout_container", $rootel);
         var $embedcontent_title = $("#embedcontent_title", $rootel);
         var $embedcontent_description = $("#embedcontent_description", $rootel);
+        var $embedcontent_width = $("input[name='width']", $rootel);
 
         // Display mode
         var $embedcontent_content = $("#embedcontent_content", $rootel);
@@ -124,7 +125,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 if (value.description){
                     value.description = sakai.api.Util.applyThreeDots(value.description, 680, {max_rows: 3});
                 }
-                
+
                 if (value.fullresult) {
                     var placement = 'ecDocViewer' + tuid + value['_path'] + sakai.api.Util.generateWidgetId();
                     wData.items[index].placement = placement;
@@ -294,6 +295,8 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 $embedcontent_title.val(wData.title);
                 $embedcontent_description.val(wData.description);
             }
+            $embedcontent_display_form.find('input[name="alignment"][value="' + (wData.alignment || 'center') +  '"]').attr('checked', 'checked');
+            $embedcontent_width.val(wData.width || '400px');
             if (wData.layout !== "single") {
                 $embedcontent_display_form.find("img.selected").removeClass('selected');
                 $embedcontent_display_form
@@ -427,6 +430,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 "layout": selectedItems.length > 1 ? formVals.layout : "single",
                 "embedmethod": formVals.style,
                 "width": formVals.style === 'fixed' ? formVals.width : '',
+                "alignment": formVals.alignment,
                 "title": formVals.title || '',
                 "description": formVals.description || '',
                 "items": itemsToSave,
@@ -497,7 +501,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 });
             }
         };
-        
+
         var processWidgetData = function(success, data, callback){
             if (success) {
                 wData = data;
@@ -644,7 +648,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 return false;
             });
         });
-        
+
         var renderDefaultContent = function(){
             sakai.api.Util.TemplateRenderer("embedcontent_content_html_template", {
                 "showDefaultContent": true
