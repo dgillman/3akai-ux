@@ -34,7 +34,7 @@
                         <div id="widget_collectionviewer_${item.placement}" class="widget_inline"></div>
                     {else}
                         {var canShare = sakai.api.Content.canCurrentUserShareContent(item.fullresult)}
-                        <div class="${embedClass} ${layout} {if embedmethod === 'thumbnail'} s3d-draggable-container {/if}" data-canshare="${canShare}" data-scope="content" data-entityid="${item.fullresult._path}" {if sakai.api.Content.Collections.isCollection(item.fullresult)} data-collection="true" {/if} {if embedmethod === 'fixed'} style="width:${width}" {/if}>
+                        <div class="${embedClass} ${layout} {if embedmethod === 'thumbnail'} s3d-draggable-container {/if}" data-canshare="${canShare}" data-scope="content" data-entityid="${item.fullresult._path}" {if sakai.api.Content.Collections.isCollection(item.fullresult)} data-collection="true" {/if} {if embedmethod === 'fixed'} style="width:${width}" {/if} data-align-content="${alignment}">
                             {var mimeType = sakai.api.Content.getMimeType(item.fullresult)}
                             {var mimeTypeDescription = sakai.api.i18n.getValueForKey(sakai.api.Content.getMimeTypeData(mimeType).description)}
                             {var thumbnail = sakai.api.Content.getThumbnail(item.fullresult)}
@@ -117,7 +117,7 @@
                         </div>
                         <div class="embedcontent_footer">
                             <div class="fl-force-right">
-                                
+
                                 <button type="button" class="s3d-link-button s3d-bold embedcontent_dont_add">__MSG__CANCEL__</button>
                                 <button type="button" id="embedcontent_just_add" class="s3d-button s3d-overlay-action-button" disabled="disabled">__MSG__ADD_SELECTED_CONTENT__</button>
                             </div>
@@ -201,9 +201,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="embedcontent_alignment">
+                                    <h2>__MSG__ALIGNMENT__</h2>
+                                    <div class="s3d-highlight_area_background">
+                                        <span>
+                                            <input type="radio" name="alignment" id="embedcontent_alignment_left" value="left"/>
+                                            <label for="embedcontent_alignment_left">__MSG__LEFT__</label>
+                                        </span>
+                                        <span>
+                                            <input type="radio" name="alignment" id="embedcontent_alignment_center" value="center"/>
+                                            <label for="embedcontent_alignment_center">__MSG__CENTER__</label>
+                                        </span>
+                                        <span>
+                                            <input type="radio" name="alignment" id="embedcontent_alignment_right" value="right"/>
+                                            <label for="embedcontent_alignment_right">__MSG__RIGHT__</label>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div id="embedcontent_add_title_description" class="s3d-highlight_area_background overflowhidden">
                                     <h2>__MSG__ADD_TITLE_DESCRIPTION__</h2>
-                                    
+
                                     <button type="button" id="embedcontent_add_title_description_button" class="s3d-button s3d-header-button s3d-header-smaller-button">__MSG__ADD__&nbsp;__MSG__DOWN_ARROW__</button>
                                     <div id="embedcontent_add_title_description_fields" style="display:none">
                                         <label for="embedcontent_title">__MSG__TITLE__</label>
