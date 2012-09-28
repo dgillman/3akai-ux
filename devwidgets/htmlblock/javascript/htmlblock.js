@@ -86,6 +86,21 @@ require(['jquery', 'sakai/sakai.api.core'], function($, sakai) {
                     theme_advanced_buttons1: 'bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontsizeselect,fontselect,|,bullist,numlist,|,forecolor,|,pasteword,link,table,image,code',
                     theme_advanced_buttons2: '',
                     theme_advanced_buttons3: '',
+                    theme_advanced_fonts : "Arial=arial,helvetica,sans-serif;"+
+                        "Arial Black=arial black,avant garde;"+
+                        "Book Antiqua=book antiqua,palatino;"+
+                        "Comic Sans MS=comic sans ms,sans-serif;"+
+                        "Courier New=courier new,courier;"+
+                        "Georgia=georgia,palatino;"+
+                        "Impact=impact,chicago;"+
+                        "Symbol=symbol;"+
+                        "Tahoma=tahoma,geneva,sans-serif;"+
+                        "Lucida Console=lucida console,monaco;"+
+                        "Times New Roman=times new roman,times;"+
+                        "Trebuchet MS=trebuchet ms,geneva;"+
+                        "Verdana=verdana,geneva;"+
+                        "Webdings=webdings;"+
+                        "Wingdings=wingdings,zapf dingbats",
                     // Styles to be shown for tables
                     table_styles: 'Default=default',
                     table_cell_styles: 'Default=default',
