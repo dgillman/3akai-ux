@@ -392,6 +392,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             var temp = {};
             var item = array[index];
             temp.id = item.id;
+            temp.target = item.target || '';
             if (temp.id && temp.id == "subnavigation_hr") {
                 temp = "hr";
             } else {
@@ -421,7 +422,8 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                     sakai.config.Navigation[i].subnav.push({
                         "id": "subnavigation_" + category.id + "_link",
                         "label": category.menuLabel || category.title,
-                        "url": "/create#l=" + category.id
+                        "url": "/create#l=" + category.id,
+                        "target": category.target || ''
                     });
                 }
             } else if (sakai.config.Navigation[i].id === "navigation_explore_link" || sakai.config.Navigation[i].id === "navigation_anon_explore_link"){
@@ -430,7 +432,8 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                     sakai.config.Navigation[i].subnav.push({
                         "id": "subnavigation_explore_" + categoryx.id + "_link",
                         "label": categoryx.titlePlural,
-                        "url": "/search#l=" + categoryx.id
+                        "url": "/search#l=" + categoryx.id,
+                        "target": categoryx.target || ''
                     });
                 }
             }
