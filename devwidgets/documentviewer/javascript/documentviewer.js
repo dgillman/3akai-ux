@@ -85,6 +85,14 @@ require(["jquery", "sakai/sakai.api.core", "/devwidgets/documentviewer/lib/docum
             $documentviewerPreview.html(
                 sakai.api.Util.TemplateRenderer('documentviewer_image_template', templateObject)
             );
+
+            // Set the width on the image if the parent embedcontent container has a width
+            if ($rootel.parents('.embedcontent_large_content').attr('style').substring(0,5) === 'width') {
+                $documentviewerPreview.find('img').css({
+                    width: $rootel.parents('.embedcontent_large_content').css('width'),
+                    'max-height': 'none'
+                });
+            }
         };
 
         var renderEmbedPreview = function(data){
