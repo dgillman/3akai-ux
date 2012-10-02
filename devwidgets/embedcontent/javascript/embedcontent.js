@@ -143,6 +143,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
             wData.download = wData.download === "true" || wData.download === true;
             wData.name = wData.name === "true" || wData.name === true;
             wData.details = wData.details === "true" || wData.details === true;
+            wData.alignment = wData.alignment || 'center';
             sakai.api.Util.TemplateRenderer($embedcontent_content_html_template, wData, $embedcontent_content);
             sakai.api.Widgets.widgetLoader.insertWidgets(tuid, false, false, docData);
         };
@@ -430,7 +431,7 @@ require(["jquery", "sakai/sakai.api.core"], function($, sakai) {
                 "layout": selectedItems.length > 1 ? formVals.layout : "single",
                 "embedmethod": formVals.style,
                 "width": formVals.style === 'fixed' ? formVals.width : '',
-                "alignment": formVals.alignment,
+                "alignment": formVals.alignment || 'center',
                 "title": formVals.title || '',
                 "description": formVals.description || '',
                 "items": itemsToSave,
