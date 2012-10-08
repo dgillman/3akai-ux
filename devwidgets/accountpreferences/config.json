@@ -1,6 +1,6 @@
 {
     "id":"accountpreferences",
-    "personalportal":true,
+    "personalportal":false,
     "i18n": {
         "default": {
             "bundle": "/devwidgets/accountpreferences/bundles/default.properties",
