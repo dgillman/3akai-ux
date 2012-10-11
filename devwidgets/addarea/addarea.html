@@ -199,7 +199,7 @@
     {if data.length}
         <ul>
             {for doc in data}
-                <li class="addarea_existing_item" data-can-manage="${doc.canManage}" data-doc-title="${doc["sakai:pooled-content-file-name"]}" data-doc-id="${doc["_path"]}"><a href="javascript:;" title="${doc["sakai:pooled-content-file-name"]}" class="s3d-regular-links s3d-bold">${doc["sakai:pooled-content-file-name"]}</a></li>
+                <li class="addarea_existing_item" data-can-manage="${doc.canManage}" data-doc-title="${doc["sakai:pooled-content-file-name"]}" data-doc-id="${doc["_path"]}" data-url-name="${doc["urlName"]}"><a href="javascript:;" title="${doc["sakai:pooled-content-file-name"]}" class="s3d-regular-links s3d-bold">${doc["sakai:pooled-content-file-name"]}</a></li>
             {/for}
         </ul>
     {else}
