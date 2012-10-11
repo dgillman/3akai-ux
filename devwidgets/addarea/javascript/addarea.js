@@ -724,9 +724,10 @@ require(["jquery", "sakai/sakai.api.core", "underscore"], function($, sakai, _){
             var $selectedDoc = $(".addarea_existing_item.selected");
             var docId = $selectedDoc.data("doc-id");
             var existingNotMine = !$selectedDoc.data("sakai-manage");
+            var urlName = $selectedDoc.attr('data-url-name');
             var nonEditable = false;
-            setSakaiDocPermissions(docId, docId, docPermission, existingNotMine, function(poolId){
-                addSakaiDocToWorld(poolId, poolId, docTitle, docPermission, nonEditable, existingNotMine, function(poolId, path){
+            setSakaiDocPermissions(docId, docId, docPermission, existingNotMine, function(poolId) {
+                addSakaiDocToWorld(urlName, poolId, docTitle, docPermission, nonEditable, existingNotMine, function(poolId, path){
                     selectPageAndShowPermissions(poolId, path, docPermission);
                 });
             });
@@ -767,6 +768,8 @@ require(["jquery", "sakai/sakai.api.core", "underscore"], function($, sakai, _){
                         }
                     }
                     data.results[i].canManage = manager;
+                    data.results[i].structure = $.parseJSON(data.results[i].structure0);
+                    data.results[i].urlName = _.keys(data.results[i].structure)[0];
                 }
                 var container = "#addarea_existing_everywhere_bottom";
                 var context = "everywhere";
