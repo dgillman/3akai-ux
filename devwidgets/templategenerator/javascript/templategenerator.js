@@ -116,21 +116,25 @@ require(['jquery', 'underscore', 'sakai/sakai.api.core'], function($, _, sakai) 
                 // 3. Docs
                 $.each(templategeneratorData.pageStructures, function(index, item) {
                     var pidIndex = '${pid}' + index;
-                    // Get the first page
-                    var firstPage = _.keys(item)[0];
 
                     // Set the docref and delete the pid if is hanging around
-                    templategeneratorData.exportData.structure[firstPage]._docref = pidIndex;
-                    delete templategeneratorData.exportData.structure[firstPage]._pid;
+                    $.each(templategeneratorData.exportData.structure, function(key, data) {
+                        if (item.pid === data._pid) {
+                            data._docref = pidIndex;
+                            delete data._pid;
+                            return false;
+                        }
+                    });
 
                     // Add the documents for the page
-                    templategeneratorData.exportData.docs['${pid}' + index] = {
+                    templategeneratorData.exportData.docs[pidIndex] = {
                         'excludeSearch': true,
                         'structure0': {}
                     };
+
                     // Add structure0 inside of that page
                     var pageRefs = [];
-                    $.each(templategeneratorData.pages[index].structure, function(pageid, pagedata) {
+                    $.each(templategeneratorData.pages[index].data.structure, function(pageid, pagedata) {
                         templategeneratorData.exportData.docs[pidIndex].structure0[pageid] = {
                             '_ref': '${refid}' + refIndex,
                             '_title': pagedata._title,
@@ -144,7 +148,7 @@ require(['jquery', 'underscore', 'sakai/sakai.api.core'], function($, _, sakai) 
                             }
                         };
                         pageRefs.push({ pageRef: pagedata._ref, index: refIndex });
-                        if (_.keys(templategeneratorData.pages[index].structure).length > 1) {
+                        if (_.keys(templategeneratorData.pages[index].data.structure).length > 1) {
                             refIndex += 1;
                         }
                     });
@@ -157,7 +161,7 @@ require(['jquery', 'underscore', 'sakai/sakai.api.core'], function($, _, sakai) 
                             'rows': []
                         };
                         // Rows on the page
-                        $.each(templategeneratorData.pages[index].pageData[pageRef].rows, function(rowIndex, row) {
+                        $.each(templategeneratorData.pages[index].data.pageData[pageRef].rows, function(rowIndex, row) {
                             if (_.isString(row)) {
                                 try {
                                     row = $.parseJSON(row);
@@ -189,10 +193,10 @@ require(['jquery', 'underscore', 'sakai/sakai.api.core'], function($, _, sakai) 
                                                     'id': cellRef,
                                                     'type': cell.type
                                                 };
-                                                if (templategeneratorData.pages[index].pageData[pageRef][cell.id]) {
+                                                if (templategeneratorData.pages[index].data.pageData[pageRef][cell.id]) {
                                                     templategeneratorData.exportData.docs[pidIndex][pageRefIndex][cellRef] = {};
                                                     templategeneratorData.exportData.docs[pidIndex][pageRefIndex][cellRef][cell.type] = {};
-                                                    var thisWidgetData = sakai.api.Server.removeServerCreatedObjects(templategeneratorData.pages[index].pageData[pageRef][cell.id][cell.type], '_');
+                                                    var thisWidgetData = sakai.api.Server.removeServerCreatedObjects(templategeneratorData.pages[index].data.pageData[pageRef][cell.id][cell.type], '_');
                                                     $.extend(templategeneratorData.exportData.docs[pidIndex][pageRefIndex][cellRef][cell.type], thisWidgetData);
                                                 }
                                             }
@@ -334,8 +338,11 @@ require(['jquery', 'underscore', 'sakai/sakai.api.core'], function($, _, sakai) 
                                 page.pageData = $.parseJSON(pageElement.body);
                                 page.structure = $.parseJSON(page.pageData.structure0);
 
-                                templategeneratorData.pages.push(sakai.api.Server.cleanUpSakaiDocObject(page));
-                                templategeneratorData.pageStructures.push(page.structure);
+                                var pid = pageElement.url.split('/p/')[1].split('.infinity.json')[0];
+
+                                templategeneratorData.pages.push({pid: pid, data: sakai.api.Server.cleanUpSakaiDocObject(page)});
+                                templategeneratorData.pageStructures.push({pid: pid, data: page.structure});
+
                                 if ( $.isFunction( callback ) ) {
                                     callback( true );
                                 }
