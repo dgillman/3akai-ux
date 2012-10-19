@@ -211,7 +211,6 @@ require(['jquery', 'underscore', 'sakai/sakai.api.core'], function($, _, sakai) 
                 });
 
                 templategeneratorData.output = JSON.stringify(templategeneratorData.exportData, null, 4);
-                templategeneratorData.output = templategeneratorData.output.replace(/\\/g, '');
 
                 createTemplateFile();
             }
